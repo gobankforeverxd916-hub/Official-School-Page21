@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official School Homepage - ثانوية واسط للمتميزين</title>
+    <!-- Load Tailwind CSS for fast, modern styling --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use the Inter font family for general text, and ensure Arabic readability --><style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+Arabic:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', 'Noto Sans Arabic', sans-serif;
+            background-color: #f7fafc; /* Light gray background */
+            direction: rtl; /* Set default text direction to right-to-life for Arabic */
+            text-align: right; /* Align text to the right for Arabic */
+        }
+        /* Specific overrides for LTR elements if needed, or adjust alignment per component */
+        nav, footer, .text-left { /* Example: if you need some elements to be left-aligned */
+            direction: ltr;
+            text-align: left;
+        }
+        .text-right-override { /* Use this class where text needs to be explicitly right-aligned */
+            text-align: right;
+            direction: rtl;
+        }
+
+        /* Custom color variables based on logo */
+        :root {
+            --primary-dark: #000000; /* Black from logo */
+            --secondary-gold: #FFD700; /* Gold/Yellow from logo */
+            --text-light: #ffffff;
+            --text-dark: #1a202c; /* Dark gray for text on light backgrounds */
+            --accent-border: #facc15; /* A slightly darker gold for borders */
+        }
+
+        /* Applying custom colors with Tailwind-like classes */
+        .bg-primary-dark { background-color: var(--primary-dark); }
+        .text-primary-dark { color: var(--primary-dark); }
+        .bg-secondary-gold { background-color: var(--secondary-gold); }
+        .text-secondary-gold { color: var(--secondary-gold); }
+        .border-secondary-gold { border-color: var(--secondary-gold); }
+        .border-accent-gold { border-color: var(--accent-border); } /* For top borders */
+
+        .hover-bg-secondary-gold:hover { background-color: var(--secondary-gold); }
+        .hover-text-secondary-gold:hover { color: var(--secondary-gold); }
+        .hover-bg-primary-dark:hover { background-color: var(--primary-dark); }
+        
+        /* Loading spinner animation */
+        .loader {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--secondary-gold);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TTS Audio Player (Hidden) -->
+    <audio id="ttsAudio" class="hidden"></audio>
+    
+    <!-- Responsive Navigation Bar --><nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16" dir="ltr"> <!-- Nav should be LTR for structural elements like logo/links --><!-- Logo/School Name --><div class="flex-shrink-0 flex items-center">
+                    <!-- Your School Logo --><img src="https://via.placeholder.com/150x50/000000/FFD700?text=Your%20Logo" alt="School Logo" class="h-10 w-auto">
+                    <!-- Placeholder: For the actual image, upload it to your GitHub repo and update the `src` attribute. -->
+                    </div>
+                <!-- Desktop Links --><div class="hidden sm:ml-6 sm:flex sm:space-x-8 items-center" dir="rtl"> <!-- Links for Arabic should be RTL --><a href="#home" class="text-gray-900 border-b-2 border-transparent hover:border-secondary-gold px-1 pt-1 text-sm font-medium transition duration-150">الرئيسية</a>
+                    <a href="#mission" class="text-gray-900 border-b-2 border-transparent hover:border-secondary-gold px-1 pt-1 text-sm font-medium transition duration-150">رسالتنا</a>
+                    <a href="#announcements" class="text-gray-900 border-b-2 border-transparent hover:border-secondary-gold px-1 pt-1 text-sm font-medium transition duration-150">الأخبار والفعاليات</a>
+                    <a href="#contact" class="text-gray-900 border-b-2 border-transparent hover:border-secondary-gold px-1 pt-1 text-sm font-medium transition duration-150">اتصل بنا</a>
+                </div>
+                <!-- Mobile Menu Button (Hamburger) --><div class="-mr-2 flex items-center sm:hidden">
+                    <button id="mobileMenuButton" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-gold" aria-expanded="false">
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) --><div class="sm:hidden hidden" id="mobileMenu" dir="rtl">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#home" class="block pl-3 pr-4 py-2 border-l-4 border-secondary-gold text-base font-medium text-secondary-gold bg-yellow-50">الرئيسية</a>
+                <a href="#mission" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300">رسالتنا</a>
+                <a href="#announcements" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300">الأخبار والفعاليات</a>
+                <a href="#contact" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300">اتصل بنا</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container --><div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- 1. Hero Section (Home) --><section id="home" class="text-center py-20 my-8 rounded-2xl shadow-xl bg-gradient-to-r from-primary-dark to-gray-800 text-white">
+            <h1 class="text-5xl font-extrabold sm:text-6xl lg:text-7xl leading-tight inline-flex items-center justify-center space-x-2" dir="rtl">
+                <button id="ttsHero" class="tts-btn bg-secondary-gold text-primary-dark rounded-full p-2 text-sm shadow-lg hover:opacity-80 transition duration-150 active:scale-95" aria-label="استماع">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.616 11.293a1 1 0 010 1.414l-2 2a1 1 0 01-1.414-1.414L12.783 11l-1.581-1.581a1 1 0 011.414-1.414l2 2z" clip-rule="evenodd"></path></svg>
+                </button>
+                 التميز عبر التفاني 
+            </h1>
+            <p id="heroText" class="mt-4 text-xl sm:text-2xl font-light opacity-90">
+                مرحباً بكم في ثانوية واسط للمتميزين. نصنع قادة الغد، اليوم.
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="#announcements" class="px-6 py-3 bg-secondary-gold text-primary-dark font-bold rounded-full shadow-lg hover:opacity-90 transition duration-300">
+                    آخر الأخبار
+                </a>
+                <a href="#contact" class="px-6 py-3 border border-secondary-gold text-white font-semibold rounded-full hover:bg-secondary-gold hover:text-primary-dark transition duration-300">
+                    تواصل معنا
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. Our Mission Section --><section id="mission" class="py-16 bg-white rounded-xl shadow-lg mb-8">
+            <div class="lg:flex lg:items-center">
+                <div class="lg:w-1/2 p-6 lg:p-12 text-right-override">
+                    <span class="text-sm font-semibold uppercase text-secondary-gold">من نحن</span>
+                    <h2 class="text-4xl font-extrabold text-gray-800 mt-2">قيمنا الأساسية ورؤيتنا</h2>
+                    <p id="missionText" class="mt-4 text-gray-600 text-lg leading-relaxed">
+                        في ثانوية واسط للمتميزين، نكرس جهودنا لتعزيز بيئة أكاديمية داعمة وصارمة حيث يمكن لكل طالب تحقيق أفضل ما لديه شخصياً. تتمثل مهمتنا في دمج التفكير النقدي وخدمة المجتمع ومحو الأمية التكنولوجية في جميع جوانب المنهج الدراسي.
+                    </p>
+                    <button id="ttsMission" class="tts-btn mt-4 inline-flex items-center space-x-2 space-x-reverse text-sm font-medium text-secondary-gold hover:text-primary-dark transition duration-150 active:scale-95" aria-label="استماع لرسالة المدرسة">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.616 11.293a1 1 0 010 1.414l-2 2a1 1 0 01-1.414-1.414L12.783 11l-1.581-1.581a1 1 0 011.414-1.414l2 2z" clip-rule="evenodd"></path></svg>
+                        <span id="ttsMissionLabel">استمع للرسالة ✨</span>
+                    </button>
+                    <ul class="mt-6 space-y-3 text-gray-700">
+                        <li class="flex items-start justify-end flex-row-reverse">
+                            <svg class="h-6 w-6 text-secondary-gold flex-shrink-0 ml-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span><strong class="font-semibold">النزاهة:</strong> التمسك بأعلى المعايير الأخلاقية.</span>
+                        </li>
+                        <li class="flex items-start justify-end flex-row-reverse">
+                            <svg class="h-6 w-6 text-secondary-gold flex-shrink-0 ml-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span><strong class="font-semibold">التميز:</strong> الالتزام بالجودة الفائقة في جميع المساعي الأكاديمية.</span>
+                        </li>
+                        <li class="flex items-start justify-end flex-row-reverse">
+                            <svg class="h-6 w-6 text-secondary-gold flex-shrink-0 ml-3 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span><strong class="font-semibold">المجتمع:</strong> تعزيز التعاون والمواطنة العالمية.</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Placeholder Image/Graphic --><div class="lg:w-1/2 p-6 flex justify-center items-center">
+                    <img class="rounded-xl shadow-2xl h-80 object-cover w-full" src="https://placehold.co/600x400/000000/FFD700?text=صورة+المدرسة" alt="School building placeholder">
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Announcements/News Section --><section id="announcements" class="py-16">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-800">آخر الأخبار والتواريخ المهمة</h2>
+                <button id="openGeneratorModalBtn" class="px-4 py-2 bg-primary-dark text-secondary-gold font-semibold rounded-lg shadow-md hover:bg-gray-700 transition duration-150 active:scale-95 focus:outline-none focus:ring-2 focus:ring-secondary-gold focus:ring-offset-2 flex items-center">
+                    <span class="ml-2">✨ إنشاء إعلان آلي</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Announcement 1 --><div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-accent-gold text-right-override">
+                    <p class="text-sm text-gray-500 mb-2">25 أكتوبر 2025</p>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">مؤتمر أولياء الأمور والمعلمين مقرر</h3>
+                    <p class="text-gray-600">سيُعقد مؤتمر أولياء الأمور والمعلمين الخريفي افتراضياً في 15 نوفمبر. يرجى مراجعة بريدكم الإلكتروني الخاص بالمدرسة للحصول على رابط التسجيل وتفاصيل الجدول.</p>
+                </div>
+                
+                <!-- Announcement 2 --><div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-accent-gold text-right-override">
+                    <p class="text-sm text-gray-500 mb-2">18 أكتوبر 2025</p>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">الإعلان عن الفائزين في معرض العلوم</h3>
+                    <p class="text-gray-600">تهانينا للفائزين في معرض العلوم الإقليمي لهذا العام! سيُعقد اجتماع الأسبوع المقبل لتكريم إنجازاتهم المتميزة.</p>
+                </div>
+
+                <!-- Announcement 3 (CTA for Clubs) --><div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-accent-gold text-right-override">
+                    <p class="text-sm text-gray-500 mb-2">مستمر</p>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">بدء التسجيل في الأندية</h3>
+                    <p class="text-gray-600 mb-4">اكتشف شغفك! تصفح عشرات المنظمات الطلابية المتاحة هذا الفصل الدراسي. انضم اليوم للمشاركة.</p>
+                    <button class="w-full py-2 bg-secondary-gold text-primary-dark font-bold rounded-lg hover:opacity-90 transition duration-200">
+                        عرض قائمة الأندية
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. Contact Information Section --><section id="contact" class="py-16">
+            <div class="bg-primary-dark rounded-xl shadow-xl p-8 md:p-12 text-white text-right-override">
+                <h2 class="text-3xl font-bold mb-4">تواصل معنا</h2>
+                <p class="text-lg mb-8 opacity-90">نحن هنا للمساعدة! يرجى استخدام تفاصيل الاتصال أدناه للاستفسارات المحددة.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-xl mb-2">المكتب العام</h4>
+                        <p>123 شارع المدرسة، المدينة، الولاية 12345</p>
+                        <p>هاتف: (555) 123-4567</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-xl mb-2">القبول والتسجيل</h4>
+                        <p>admissions@[yourschool].edu</p>
+                        <p>فاكس: (555) 123-4568</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-xl mb-2">دعم المجموعة التقنية</h4>
+                        <p>techgroup@[yourschool].edu</p>
+                        <p class="text-sm opacity-75 mt-1">للحصول على ملاحظات حول الموقع أو دعم تكنولوجيا المعلومات.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer --><footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-right-override">
+            <p>&copy; <span id="currentYear"></span> ثانوية واسط للمتميزين. جميع الحقوق محفوظة.</p>
+            <p class="text-sm text-gray-400 mt-2">
+                صمم بواسطة فريق التقنية في المدرسة
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Modal for Announcement Generator -->
+    <div id="generatorModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg m-4 text-right-override">
+            <h3 class="text-2xl font-bold mb-6 text-primary-dark border-b pb-2">✨ إنشاء إعلان آلي</h3>
+            
+            <form id="generatorForm">
+                <div class="mb-4">
+                    <label for="topicInput" class="block text-sm font-medium text-gray-700 mb-2">موضوع الإعلان (مثال: عطلة مدرسية، أو مباراة كرة قدم بين الصفوف)</label>
+                    <input type="text" id="topicInput" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary-gold focus:border-secondary-gold sm:text-sm" placeholder="اكتب الموضوع هنا...">
+                </div>
+                
+                <div class="flex justify-end space-x-3 space-x-reverse">
+                    <button type="button" id="closeGeneratorModalBtn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition duration-150">
+                        إلغاء
+                    </button>
+                    <button type="submit" id="generateButton" class="px-4 py-2 bg-secondary-gold text-primary-dark font-semibold rounded-lg shadow-md hover:opacity-90 transition duration-150 flex items-center justify-center">
+                        <div id="loader" class="loader mr-2 hidden"></div>
+                        <span>إنشاء المسودة</span>
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Output Area -->
+            <div id="announcementOutput" class="mt-8 pt-4 border-t border-gray-200 hidden">
+                <h4 class="font-bold text-xl mb-3 text-primary-dark">مسودة الإعلان الجاهزة:</h4>
+                <div id="draftContent" class="bg-gray-50 p-4 rounded-lg border border-gray-100 whitespace-pre-wrap text-gray-800">
+                    <!-- Generated text goes here -->
+                </div>
+                <button id="closeOutputBtn" class="mt-4 w-full py-2 bg-primary-dark text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition duration-150">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Dynamic elements (Mobile Menu, Footer Year, and Gemini API) -->
+    <script>
+        // --- Gemini API Setup & Utilities ---
+        const API_KEY = ""; // Canvas will provide this key at runtime
+        const TEXT_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
+        const TTS_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${API_KEY}`;
+        const ttsAudio = document.getElementById('ttsAudio');
+
+        // Utility functions for handling PCM audio data from TTS API
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
+        }
+
+        function base64ToArrayBuffer(base64) {
+            const binaryString = atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        function pcmToWav(pcm16, sampleRate) {
+            const numChannels = 1;
+            const bytesPerSample = 2; // 16-bit PCM
+            const blockAlign = numChannels * bytesPerSample;
+            const byteRate = sampleRate * blockAlign;
+            const dataSize = pcm16.byteLength;
+            const fileSize = 36 + dataSize;
+
+            const buffer = new ArrayBuffer(fileSize);
+            const view = new DataView(buffer);
+
+            let offset = 0;
+
+            // RIFF chunk
+            writeString(view, offset, 'RIFF'); offset += 4;
+            view.setUint32(offset, fileSize - 8, true); offset += 4;
+            writeString(view, offset, 'WAVE'); offset += 4;
+
+            // fmt chunk
+            writeString(view, offset, 'fmt '); offset += 4;
+            view.setUint32(offset, 16, true); offset += 4; // Sub-chunk size
+            view.setUint16(offset, 1, true); offset += 2; // Audio format (1 = PCM)
+            view.setUint16(offset, numChannels, true); offset += 2;
+            view.setUint32(offset, sampleRate, true); offset += 4;
+            view.setUint32(offset, byteRate, true); offset += 4;
+            view.setUint16(offset, blockAlign, true); offset += 2;
+            view.setUint16(offset, 16, true); offset += 2; // Bits per sample (16)
+
+            // data chunk
+            writeString(view, offset, 'data'); offset += 4;
+            view.setUint32(offset, dataSize, true); offset += 4;
+
+            // Copy PCM data
+            const pcmArray = new Uint8Array(pcm16.buffer);
+            for (let i = 0; i < dataSize; i++) {
+                view.setUint8(offset + i, pcmArray[i]);
+            }
+
+            return new Blob([buffer], { type: 'audio/wav' });
+        }
+        
+        // --- Core Fetch Function with Exponential Backoff ---
+        async function fetchWithBackoff(url, options, maxRetries = 5) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) {
+                        return response;
+                    }
+                    if (response.status === 429 || response.status >= 500) {
+                        if (i === maxRetries - 1) throw new Error(`API failed after ${maxRetries} retries.`);
+                        const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        continue;
+                    }
+                    throw new Error(`API request failed with status ${response.status}: ${await response.text()}`);
+                } catch (error) {
+                    if (i === maxRetries - 1) throw error;
+                    const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+        
+        // --- TTS Functionality ---
+
+        async function speakText(textToSpeak, buttonElement, labelElement) {
+            const originalLabel = labelElement.textContent;
+            buttonElement.disabled = true;
+            labelElement.textContent = "جاري التحميل...";
+
+            try {
+                const payload = {
+                    contents: [{
+                        parts: [{ text: textToSpeak }]
+                    }],
+                    generationConfig: {
+                        responseModalities: ["AUDIO"],
+                        speechConfig: {
+                            voiceConfig: {
+                                // Using a neutral Arabic-supporting voice
+                                prebuiltVoiceConfig: { voiceName: "Charon" } 
+                            }
+                        }
+                    },
+                    model: "gemini-2.5-flash-preview-tts"
+                };
+
+                const response = await fetchWithBackoff(TTS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    // Extract sample rate from mimeType (e.g., audio/L16;rate=16000)
+                    const sampleRateMatch = mimeType.match(/rate=(\d+)/);
+                    const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 16000; // Default to 16000
+
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const pcm16 = new Int16Array(pcmData);
+                    
+                    const wavBlob = pcmToWav(pcm16, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    ttsAudio.src = audioUrl;
+                    ttsAudio.play();
+                } else {
+                    console.error("TTS generation failed or returned no audio data:", result);
+                    alert("فشل إنشاء الصوت. يرجى مراجعة وحدة التحكم."); // Custom UI message needed
+                }
+
+            } catch (error) {
+                console.error("Error during TTS request:", error);
+                alert("حدث خطأ أثناء طلب الصوت."); // Custom UI message needed
+            } finally {
+                labelElement.textContent = originalLabel;
+                buttonElement.disabled = false;
+            }
+        }
+        
+        // --- Announcement Generator Functionality ---
+        const generatorModal = document.getElementById('generatorModal');
+        const generatorForm = document.getElementById('generatorForm');
+        const generateButton = document.getElementById('generateButton');
+        const draftContent = document.getElementById('draftContent');
+        const announcementOutput = document.getElementById('announcementOutput');
+        const loader = document.getElementById('loader');
+
+        async function generateAnnouncement(topic) {
+            const systemPrompt = "You are an official school communications officer. Write a formal, professional, and positive announcement in modern standard Arabic. The tone should be encouraging and authoritative. Include clear dates/times and a call to action if applicable. The output should be concise and ready to publish.";
+            const userQuery = `Draft an official announcement for the school website about the following topic: "${topic}". Keep it around 150-200 words.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+                config: {
+                    temperature: 0.7
+                }
+            };
+
+            // Show loading state
+            generateButton.disabled = true;
+            loader.classList.remove('hidden');
+            generateButton.querySelector('span').textContent = "جارٍ الإنشاء...";
+            announcementOutput.classList.add('hidden');
+            draftContent.textContent = '';
+            
+            try {
+                const response = await fetchWithBackoff(TEXT_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const generatedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (generatedText) {
+                    draftContent.textContent = generatedText;
+                    announcementOutput.classList.remove('hidden');
+                } else {
+                    draftContent.textContent = 'عذراً، فشل توليد المسودة. يرجى المحاولة مرة أخرى.';
+                    announcementOutput.classList.remove('hidden');
+                    console.error("Gemini Text Generation Failed:", result);
+                }
+
+            } catch (error) {
+                console.error("Error during text generation:", error);
+                draftContent.textContent = 'حدث خطأ غير متوقع أثناء الاتصال بالخادم.';
+                announcementOutput.classList.remove('hidden');
+            } finally {
+                // Restore button state
+                generateButton.disabled = false;
+                loader.classList.add('hidden');
+                generateButton.querySelector('span').textContent = "إنشاء المسودة";
+            }
+        }
+        
+        // --- Event Listeners and Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in the footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+            });
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // TTS Button Handlers
+            document.getElementById('ttsHero').addEventListener('click', () => {
+                const text = document.getElementById('heroText').textContent.trim();
+                speakText(text, document.getElementById('ttsHero'), { textContent: "استماع" });
+            });
+            document.getElementById('ttsMission').addEventListener('click', (e) => {
+                const text = document.getElementById('missionText').textContent.trim();
+                speakText(text, document.getElementById('ttsMission'), document.getElementById('ttsMissionLabel'));
+            });
+            
+            // Generator Modal Handlers
+            document.getElementById('openGeneratorModalBtn').addEventListener('click', () => {
+                generatorModal.classList.remove('hidden');
+                // Reset form state when opening
+                generatorForm.reset();
+                announcementOutput.classList.add('hidden');
+            });
+            document.getElementById('closeGeneratorModalBtn').addEventListener('click', () => {
+                generatorModal.classList.add('hidden');
+            });
+            document.getElementById('closeOutputBtn').addEventListener('click', () => {
+                generatorModal.classList.add('hidden');
+            });
+
+            // Handle Generator Form Submission
+            generatorForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const topic = document.getElementById('topicInput').value.trim();
+                if (topic) {
+                    generateAnnouncement(topic);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
